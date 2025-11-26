@@ -1,0 +1,21 @@
+// Source - https://stackoverflow.com/a/71526250
+// Posted by mikemaccana, modified by community. See post 'Timeline' for change history
+// Retrieved 2025-11-26, License - CC BY-SA 4.0
+
+{
+  // https://www.typescriptlang.org/tsconfig#compilerOptions
+  "compilerOptions": {
+    "esModuleInterop": true,
+    "lib": ["es2020"],
+    "module": "es2022",
+    "preserveConstEnums": true,
+    "moduleResolution": "node",
+    "strict": true,
+    "sourceMap": true,
+    "target": "es2022",
+    "types": ["node"],
+    "outDir": "dist"
+  },
+  "include": ["./*"],
+  "exclude": ["node_modules"]
+}

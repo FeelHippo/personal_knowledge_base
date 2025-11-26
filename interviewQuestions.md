@@ -936,7 +936,7 @@ class Driver {
 
 Active-Record is the design pattern that promotes objects to include functions such as Insert, Update, and Delete, and properties that correspond to the columns in some underlying database table.
 
-In your opinion and experience, which are the limits and pitfalls of the this pattern?
+In your opinion and experience, which are the limits and pitfalls of this pattern?
 
 - [Active Record Pattern vs. Repository Pattern: Making the Right Choice](https://medium.com/@shiiyan/active-record-pattern-vs-repository-pattern-making-the-right-choice-f36d8deece94)
 - `Active Record Pattern`
