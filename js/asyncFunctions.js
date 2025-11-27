@@ -4,18 +4,25 @@
 // in its basic form, an async function looks like this
 // note, "new Promise" is being replaced by async/await, see below
 // also, note how "Promise" is not a function, it is an Object
-const asyncFunction = new Promise((resolve, reject) => resolve('Result of an async operation, such as an API petition'))
+const bodyParser = async (req) => {
+    return new Promise((resolve, reject) => {
+        let body = '';
+        req.on('data', data => body += data);
+        req.on('end', () => resolve(body));
+        req.on('error', reject);
+    });
+};
 
 // if we invoke this function like a regular function, we get a pended Promise:
-console.log(asyncFunction)
+console.log(bodyParser({ body: {} }));
 
 // there are two ways to resolve a promise
 // old way, less common now
-asyncFunction.then(value => console.log(value))
+bodyParser({ body: {} }).then(value => console.log(value))
 
 // current and preferred way
-const asyncAwaitFunction = async () => await Promise.resolve('ALWAYS USE ASYNC/AWAIT') // note that the keyword 'await' is always inside a funcion bearing the 'async' directive
-asyncAwaitFunction().then(console.log)
+const asyncAwaitFunction = async () => Promise.resolve('ALWAYS USE ASYNC/AWAIT');
+await asyncAwaitFunction();
 
 // resolve multiple promises:
 // suppose we have 3 promises

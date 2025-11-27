@@ -66,6 +66,12 @@
             <li><a href="#concurrency">Concurrency</a></li>
             <li><a href="#optimise-array-search">Optimise array search</a></li>
             <li><a href="#is-nodejs-multithread">Is Nodejs multithread</a></li>
+            <li><a href="https://www.builder.io/blog/visual-guide-to-nodejs-event-loop">Async operations, Node.js Event Loop, nextTick and promise queue, timers phase, I/O phase, check phase</a></li>
+            <li><a href="https://thevalleyofcode.com/javascript-promises/">Promises in JavaScript</a></li>
+            <li><a href="https://www.mongodb.com/resources/basics/databases/nosql-explained/nosql-vs-sql">SQL Vs NoSQL, or horizontal scaling vs vertical scaling</a></li>
+            <li><a href="https://www.atlassian.com/data/databases/how-does-indexing-work">How Does Indexing Work</a></li>
+            <li><a href="#what-is-typescript">What is TypeScript</a></li>
+            <li><a href="#abstract-class-vs-interface">Abstract class Vs interface</a></li>
         </ul>
         <summary>Design Patterns</summary>
         <ul>
@@ -742,7 +748,63 @@ As of 2022, NodeJs supports [worker threads](https://nodejs.org/api/worker_threa
 
 In a recent interview, I was told that worker threads should not be used, because of their poor performance. 
 
-Apart from being wrong, NodeJs provides `worker.performance` to monitor performance. 
+Apart from being wrong and unsubstantiated, NodeJs provides `worker.performance` to monitor performance. 
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- WHAT IS TYPESCRIPT -->
+
+## What is TypeScript
+
+```text
+TypeScript (TS) is a high-level programming language that adds static typing with optional type annotations to JavaScript. 
+
+It is designed for developing large applications. 
+
+It transpiles to JavaScript.
+```
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- ABSTRACT CLASS VS INTERFACE -->
+
+## Abstract class Vs interface
+
+See [this](https://stackoverflow.com/a/50115567/10708345) SO answer.
+
+Abstract classes are a traditional OOP approach, which is not traditional in JavaScript.
+
+Both approaches allow the same things to be done. They are two different ways of solving a problem.
+
+An interface is a *contract* that defines the properties and what the object that implements it can do.
+
+```typescript
+interface Electrician {
+  layWires(): void
+}
+
+interface Plumber {
+  layPipes(): void
+}
+
+function restoreHouse(e: Electrician, p: Plumber) {
+    e.layWires()
+    p.layPipes()
+}
+```
+
+When you define an abstract class, you often try to *control how a process has to be implemented*.
+
+```typescript
+abstract class HouseRestorer {
+  protected abstract layWires(): void
+  protected abstract layPipes(): void
+  restoreHouse() {
+    this.layWires()
+    this.layPipes()
+  }
+}
+```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
