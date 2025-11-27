@@ -63,6 +63,9 @@
             <li><a href="https://www.goanywhere.com/blog/http-vs-tcp-whats-the-difference">The Main Differences Between HTTP and TCP</a></li>
             <li><a href="#sqs-consumer-failure">SQS Consumer Failure</a></li>
             <li><a href="#multi-tenant-architecture">Multi Tenant Architecture</a></li>
+            <li><a href="#concurrency">Concurrency</a></li>
+            <li><a href="#optimise-array-search">Optimise array search</a></li>
+            <li><a href="#is-nodejs-multithread">Is Nodejs multithread</a></li>
         </ul>
         <summary>Design Patterns</summary>
         <ul>
@@ -692,6 +695,54 @@ Tenant data is isolated from access by other tenants in the following ways:
               - the Bridge Model isolates tenant data into a dedicated schema per tenant;
               - the Pool Model uses the row-level security features of the database engine.
 ```
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- CONCURRENCY -->
+
+## Concurrency
+
+In most scenarios, databases are used concurrently by multiple application instances, each performing modifications to data independently of each other.
+
+When the same data gets modified at the same time, inconsistencies and data corruption can occur.
+
+See [this](https://blog.professorbeekums.com/2021/solving-concurrency-problems/) little blog post.
+
+Two opposite approaches:
+- [*optimistic concurrency*](https://learn.microsoft.com/en-us/ef/core/saving/concurrency?tabs=data-annotations), assumes that concurrency conflicts are relatively rare
+  - takes no locks,
+  - arranges for the data modification to fail *on save* if the data has changed since it was queried,
+  - failure is reported to the application,
+  - retry the entire operation on the new data
+- *pessimistic approaches*, lock data up-front and only then proceed to modify it.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- OPTIMISE ARRAY SEARCH -->
+
+## Optimise array search
+
+See [this](https://stackoverflow.com/questions/7656791/fastest-way-to-search-for-an-element-in-unsorted-array) SO answer.
+
+```text
+If you're searching for one element once, just iterate through it. No possible way to get it faster.
+
+If you're searching multiple times, it would be worth it to index it (or sort it, if you will) and make the following searches fast (log(n)).
+```
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- IS NODEJS MULTITHREAD -->
+
+## Is Nodejs multithread
+
+The "canonical" answer is "no", but that is the answer uninformed people expect. 
+
+As of 2022, NodeJs supports [worker threads](https://nodejs.org/api/worker_threads.html).
+
+In a recent interview, I was told that worker threads should not be used, because of their poor performance. 
+
+Apart from being wrong, NodeJs provides `worker.performance` to monitor performance. 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
