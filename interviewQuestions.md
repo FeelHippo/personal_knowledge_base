@@ -909,28 +909,28 @@ Every DI implementation can be considered IoC, but one should not call it IoC, b
 
 For DI example, say your application has a text-editor component, and you want to provide spell checking. Your standard code would look something like this:
 
+*BAD*
+```dart
+class TextEditor {
 
-```
-public class TextEditor {
-
-    private SpellChecker checker;
+    SpellChecker _checker;
 
     public TextEditor() {
-        this.checker = new SpellChecker();
+      _checker = new SpellChecker();
     }
 }
 ```
 
 What we've done here creates a dependency between the TextEditor and the SpellChecker. In an IoC scenario we would instead do something like this:
 
+*IOC*
+```dart
+class TextEditor {
 
-```
-public class TextEditor {
-
-    private IocSpellChecker checker;
+    IocSpellChecker _checker;
 
     public TextEditor(IocSpellChecker checker) {
-        this.checker = checker;
+      _checker = checker;
     }
 }
 ```
@@ -940,9 +940,9 @@ In the first code example we are instantiating SpellChecker (this.checker = new 
 In the second code example we are creating an abstraction by having the SpellChecker dependency class in TextEditor's constructor signature (not initializing dependency in class). This allows us to call the dependency then pass it to the TextEditor class like so:
 
 
-```
-SpellChecker sc = new SpellChecker(); // dependency
-TextEditor textEditor = new TextEditor(sc);
+```dart
+SpellChecker sc = SpellChecker(); // dependency
+TextEditor textEditor = TextEditor(sc);
 ```
 
 Now the client creating the TextEditor class has control over which SpellChecker implementation to use because we're injecting the dependency into the TextEditor signature.
