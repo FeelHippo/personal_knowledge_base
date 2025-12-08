@@ -21,4 +21,4 @@ class child extends parent {
     }
 }
 
-new child();
+new child().printSomething();
