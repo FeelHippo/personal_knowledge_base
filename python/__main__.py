@@ -1,3 +1,5 @@
+from typing import List
+
 def reverse_string(string: str) -> str:
     reversed_string = ''
     for char in string:
@@ -27,4 +29,31 @@ print(fizz_buzz(3))
 print(fizz_buzz(5))
 print(fizz_buzz(15))
 
+def bubble_sort(numbers: List[int]) -> List[int]:
+    for i, _ in enumerate(numbers):
+        for j, _ in enumerate(numbers):
+            if j < len(numbers) - 1:
+                if numbers[j] > numbers[j+1]:
+                    temp = numbers[j]
+                    numbers[j] = numbers[j+1]
+                    numbers[j+1] = temp
+    return numbers
 
+print(bubble_sort([7,5,21,65,78,53,23,6,2,1]))
+
+def reverse_array(numbers: List[int]) -> List[int]:
+    reversed_array = []
+    for num in numbers:
+        reversed_array.insert(0, num)
+    return reversed_array
+
+print(reverse_array([0, 1, 2, 3, 4]))
+
+def fibonacci(num_items: int, fibonacci_list = [], index = 0) -> List[int]:
+    if num_items == 0: return fibonacci_list
+    elif index == 0: fibonacci_list.append(0)
+    elif index == 1: fibonacci_list.append(1)
+    else: fibonacci_list.append(fibonacci_list[-2] + fibonacci_list[-1])
+    return fibonacci(num_items-1, fibonacci_list, index+1)
+
+print(fibonacci(18))

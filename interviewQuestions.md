@@ -482,6 +482,17 @@ References: [OAuth2 basics](https://supertokens.com/docs/authentication/unified-
 - In **MVVM**, the *ViewModel doesn’t directly reference the View*, ensuring better testability.
 - In *MVP*, the *Presenter directly interacts with the View*.
 
+See <a href="https://learn.microsoft.com/en-us/dotnet/architecture/maui/mvvm#model">Microsoft's docs on MVVM:</a>
+```text
+Model classes are typically used in conjunction with services or repositories that encapsulate data access and caching
+```
+
+Putting that into perspective:
+```text
+| View | -- data binding and commands --> | ViewModel | -- ViewModel updates --> | Model              |
+|      | <-- notification --------------- |           | <-- notification ------- | ~~ Repositories ~~ |
+```
+
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- ROLE OF THE REPOSITORY -->
@@ -493,17 +504,6 @@ The Repository **abstracts data sources** (e.g., local database, API). It:
 - Provides a *single source of truth*.
 - Encapsulates *data operations*.
 - Makes it easier to *manage multiple data sources*
-
-See <a href="https://learn.microsoft.com/en-us/dotnet/architecture/maui/mvvm#model">Microsoft's docs on MVVM:</a>
-```text
-Model classes are typically used in conjunction with services or repositories that encapsulate data access and caching
-```
-
-Putting that into perspective: 
-```text
-| View | -- data binding and commands --> | ViewModel | -- ViewModel updates --> | Model              |
-|      | <-- notification --------------- |           | <-- notification ------- | ~~ Repositories ~~ |
-```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 

@@ -71,12 +71,12 @@ console.log(filterUnique())
 // Nest two loops to compare the numbers in the array.
 // The array will be sorted in ascending order by replacing the elements if found in any other order
 
-const arrToSort = [100, 1, 2, 7, 6, 4, 9, 12];
+const arrToSort = [7,5,21,65,78,53,23,6,2,1];
 const bubble = (arr: number[]) => {
     for (let i = 0; i < arr.length; i++) {
         for (let k = 0; k < arr.length; k++) {
             if (arr[k] > arr[k + 1]) {
-                var temp = arr[k]
+                const temp = arr[k];
                 arr[k] = arr[k + 1]
                 arr[k + 1] = temp
             }
