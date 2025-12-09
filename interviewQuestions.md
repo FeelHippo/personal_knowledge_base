@@ -999,18 +999,19 @@ Problem:
 Driver knows too much about Car’s internals (the Engine).
 This creates tight coupling — any change in Car’s engine structure could break Driver.
 
-```
+```dart
 class Engine {
-    public void start() { System.out.println("Engine started"); }
+    void start() { print("Engine started"); }
 }
 
 class Car {
-    private Engine engine = new Engine();
-    public Engine getEngine() { return engine; }
+    Car(this.engine);
+    Engine engine;
+    Engine getEngine() { return engine; }
 }
 
 class Driver {
-    public void drive(Car car) {
+    void drive(Car car) {
         car.getEngine().start(); // ❌ Violates LoD
     }
 }
@@ -1024,18 +1025,21 @@ Driver only interacts with Car, not Engine.
 Car encapsulates its Engine internally.
 Changes inside Engine do not affect Driver.
 
-```
+```dart
 class Engine {
-    public void start() { System.out.println("Engine started"); }
+    void start() { System.out.println("Engine started"); }
 }
 
 class Car {
-    private Engine engine = new Engine();
+    Car(this.engine);
+    Engine engine;
     public void startEngine() { engine.start(); } // LoD-friendly interface
 }
 
 class Driver {
-    public void drive(Car car) {
+    Driver(this.car);
+    Car car;
+    void drive() {
         car.startEngine(); // ✅ Only talks to immediate friend
     }
 }
@@ -1192,8 +1196,7 @@ class NullCustomer extends Customer {
 }
 
 // Replace null values with Null-object.
-let customer = (order.customer != null) ?
-  order.customer : new NullCustomer();
+let customer = order.customer ?? new NullCustomer();
 
 // Use Null-object as if it's normal subclass.
 plan = customer.getPlan();
@@ -1352,7 +1355,7 @@ abstract class Car {
     void accelerate();  
 }  
 // concrete class
-class Suzuki extends Car{  
+class Suzuki extends Car {  
     void accelerate(){
         print('Suzuki -> accelerate');
      
