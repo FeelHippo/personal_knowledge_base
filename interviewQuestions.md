@@ -116,6 +116,8 @@
             <li><a href="#language-interoperability">Language Interoperability</a></li>
             <li><a href="#hate-of-java">Hate of Java</a></li>
             <li><a href="#good-and-bad-languages">Good and Bad Languages</a></li>
+            <li><a href="#list-comprehension">List Comprehension</a></li>
+            <li><a href="#first-class-citizen-functions">First Class Citizen Functions</a></li>
             <li><a href="#referential-transparency">Referential Transparency</a></li>
             <li><a href="#stack-and-heap">Stack and Heap</a></li>
             <li><a href="#pattern-matching">Pattern Matching</a></li>
@@ -1383,7 +1385,6 @@ const total2 = price * 2;
 ```
 *GOOD*
 ```javascript
-const price = 99.99;
 const calculateTotal = (unitPrice, itemsCount) => {
     return unitPrice * itemsCount;
 }
@@ -1398,12 +1399,10 @@ const vatTotal = calculateTotal(price, 2) * vat;
 ```
 *GOOD*
 ```javascript
-const price = 99.99;
-const vat = 0.21;
 // option 1
 const calculateTotal = (unitPrice, itemsCount) => unitPrice * itemsCount;
 const calculateTotalWithVAT = (totWithoutVAT, vat) => totWithoutVAT * vat;
-const totalWithVAT = calculateTotalWithVAT(calculateTotal(price * 2), vat);
+const totalWithVAT = calculateTotalWithVAT(calculateTotal(99.99 * 2), 0.21);
 // option 2
 const calculateTotal = (unitPrice, itemsCount, vat) => {
     const totWithoutVAT = unitPrice * itemsCount;
@@ -2172,6 +2171,48 @@ Conversely, some programming languages are frequently cited as the most hated du
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
+<!-- LIST COMPREHENSION -->
+
+## List Comprehension
+
+It is a way to create lists using a concise syntax. It allows us to generate a new list by applying an expression to each item in an existing iterable (such as a list or range).
+
+```python
+a = [0,1,2,3,4,5]
+res = [val ** 2 for val in a]
+print(res)
+```
+
+```javascript
+const result = [...Array(5)].map(() => Math.random() * (100 - 0))
+console.log(result)
+```
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- FIRST CLASS CITIZEN FUNCTIONS -->
+
+## First Class Citizen Functions
+
+See [this](https://stackoverflow.com/a/5178101/10708345) great SO answer.
+
+```text
+A language that considers procedures to be "first-class" allows functions to be passed around just like any other value.
+```
+
+```python
+def make_adder(addend):
+    def f(x):
+        return addend + x
+    return f # returns a function, as if it were any other kind of value
+
+def output_calculation(f):
+    f(make_adder(1)(1))
+output_calculation(print)
+```
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
 <!-- REFERENTIAL TRANSPARENCY -->
 
 ## Referential Transparency
@@ -2316,36 +2357,44 @@ In Java, C# and many other languages, why are constructors not part of the inter
 
 ```typescript
 interface Addition {
-   add: (x: int, y: int) => int; // public static
+    add: (x: number, y: number) => number; // public static
 }
 class Test implements Addition {
-   add(x: int, y: int) {
-      return x + y;
-   }
+    constructor(x: number, y: number) {
+        this._x = x;
+        this._y = y;
+    }
+    private readonly _x: number;
+    private readonly _y: number;
+    add() {
+        return this._x + this._y;
+    }
 }
+
+console.log(new Test(1, 1).add())
 ```
 
-- An abstract class can have a constructor because it can be instantiated indirectly through its subclasses
+- in Dart, an abstract class can have a constructor because it can be instantiated indirectly through its subclasses
   - See [Constructors in Dart – Use Cases and Examples](https://www.freecodecamp.org/news/constructors-in-dart/). 
 
 ```dart
+void main() {
+  final Animal cat = Cat('feline', 'siamese');
+  print(cat.species); // feline
+}
+
 abstract class Animal {
-  const Animal({String species = 'cat'}) : _species = species;
+  const Animal(this.species);
 
-  final String _species;
-
-  String get species => _species;
+  final String species;
 }
 
 class Cat extends Animal {
-  const Cat({String species = 'cat', String breed = 'siamese'})
-      : _breed = breed,
-        super(species: species); // Animal instantiated indirectly through Cat
+  const Cat(super.species, this.breed);
 
-  final String _breed;
-
-  String get breed => _breed;
+  final String breed;
 }
+
 ```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
