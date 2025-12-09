@@ -1,4 +1,6 @@
 # Functional programming
+from math import sqrt
+
 
 # first-class-citizen function
 def make_adder(addend):
@@ -24,3 +26,15 @@ def dynamic_data(**kwargs):
         print("%s: %s" % (key, value))
 
 dynamic_data(name = 'Filippo', age = 40, funky = True)
+
+# Lambda functions:
+# A lambda function is a small anonymous function
+# lambda arguments : expression
+
+# = ( args ) : ( expression )
+x = lambda a : a + 10
+print(x(5))
+
+# Heron's formula
+area = lambda a, b, c : 0.25 * sqrt( (a + b + c) * (-a + b + c) * (a - b + c) * (a + b - c) )
+print(area(12, 10, 8))
