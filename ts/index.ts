@@ -111,3 +111,40 @@ const fibonacci = (num: number, arr: number[] = [], index = 0): String => {
 }
 
 console.log(fibonacci(18))
+
+// def word_counts(sentences: list[str]) -> dict[str, int]:
+// """Returns a dictionary with words from the input sentences as keys and their frequency as values"""
+
+// input: ['hello world', 'my name is world']
+// Record<string, number> => { 'hello': 1, 'world': 2... }
+
+function wordCounts(sentences: string[]): Record<string, number> {
+    let dictionary: Record<string, number> = {};
+    for (var i = 0; i < sentences.length; i++) {
+        const currentSentence = sentences[i];
+        const currentWordList = currentSentence.split(' ');
+        for (const word of currentWordList) {
+            if (word in dictionary) {
+                dictionary[word] = dictionary[word] + 1;
+            } else {
+                dictionary[word] = 1;
+            }
+        }
+    }
+    return dictionary;
+}
+
+console.log(wordCounts(['hello world', 'my name is world', 'we are the world']))
+
+// Option #2
+function wordCountsArgs(...sentences: string[]): Record<string, number> {
+    let dictionary: Record<string, number> = {};
+    for (const sentence of sentences) {
+        for (const word of sentence.split(' ')) {
+            dictionary[word] = !!dictionary[word] ? dictionary[word] + 1 : 1;
+        }
+    }
+    return dictionary;
+}
+
+console.log(wordCountsArgs('hello world', 'my name is world', 'we are the world', 'all around the world'))

@@ -57,3 +57,14 @@ def fibonacci(num_items: int, fibonacci_list = [], index = 0) -> List[int]:
     return fibonacci(num_items-1, fibonacci_list, index+1)
 
 print(fibonacci(18))
+
+def word_counts(sentences: list[str]) -> dict[str, int]:
+    """Returns a dictionary with words from the input sentences as keys and their frequency as values"""
+    count: dict[str, int] = {}
+    for sentence in sentences:
+        words = sentence.split(' ')
+        for word in words:
+            count[word] = count.get(word) + 1 if word in count else 1
+    return count
+
+print(word_counts(['hello world', 'my name is world', 'we are the world']))
