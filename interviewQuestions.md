@@ -72,6 +72,7 @@
             <li><a href="https://www.atlassian.com/data/databases/how-does-indexing-work">How Does Indexing Work</a></li>
             <li><a href="#what-is-typescript">What is TypeScript</a></li>
             <li><a href="#abstract-class-vs-interface">Abstract class Vs interface</a></li>
+            <li><a href="#sql-injection">SQL Injection</a></li>
         </ul>
         <summary>Design Patterns</summary>
         <ul>
@@ -807,6 +808,34 @@ abstract class HouseRestorer {
   }
 }
 ```
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- SQL INJECTION -->
+
+## SQL Injection
+
+See [this](https://portswigger.net/web-security/sql-injection#what-is-sql-injection-sqli) article.
+
+SQL injection (SQLi) is a web security vulnerability that allows an attacker to interfere with the queries that an application makes to its database.
+
+Most SQL injection vulnerabilities occur within the **WHERE** clause of a **SELECT** query. Most experienced testers are familiar with this type of SQL injection.
+
+However, SQL injection vulnerabilities can occur at any location within the query, and within different query types. Some other common locations where SQL injection arises are:
+
+```
+In UPDATE statements, within the updated values or the WHERE clause.
+In INSERT statements, within the inserted values.
+In SELECT statements, within the table or column name.
+In SELECT statements, within the ORDER BY clause.
+```
+
+Some common SQL injection examples include:
+
+- [Retrieving hidden data](https://portswigger.net/web-security/sql-injection#retrieving-hidden-data), where you can modify a SQL query to return additional results.
+- [Subverting application logic](https://portswigger.net/web-security/sql-injection#subverting-application-logic), where you can change a query to interfere with the application's logic.
+- [UNION attacks](https://portswigger.net/web-security/sql-injection/union-attacks), where you can retrieve data from different database tables.
+- [Blind SQL injection](https://portswigger.net/web-security/sql-injection/blind), where the results of a query you control are not returned in the application's responses.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -2554,6 +2583,18 @@ In web development, Model-View Controller and Model-View-ViewModel approaches ar
 See [Mozilla's reference on MVC](https://developer.mozilla.org/en-US/docs/Glossary/MVC)
 
 ![See it here](https://developer.mozilla.org/en-US/docs/Glossary/MVC/model-view-controller-light-blue.png)
+
+Which area of concern is responsible for DB interaction?
+
+See [this](https://softwareengineering.stackexchange.com/a/349765) SO answer.
+
+```
+MVC is agnostic to the data source.
+
+The model isn't a code word for the DB. It's the code responsible modeling the state of your system. In a web site it knows if the user is logged in. The DB doesn't have to know any of that. The DB, if it even exists, knows what needs to be remembered. Its responsibly is persistence. Not modeling.
+
+Usually, a resource (typically a record in a DB) is represented as a Model. Say, you have a table for users in a website. A corresponding model named something like UserModel would expose all the relevant APIs to Create, Retrieve, Update and Delete a user from the DB.
+```
 
 See [Microsoft's reference on MVVM](https://learn.microsoft.com/en-us/dotnet/architecture/maui/mvvm)
 
