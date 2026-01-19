@@ -1,4 +1,10 @@
 void main() {
+  // Functions as First Class Citizens
+  // A programming language is said to have First-class functions when functions in that language are treated like any other variable.
+  // For example, in such a language, a function can be passed as an argument to other functions, 
+  // can be returned by another function and can be assigned as a value to a variable.
+  // Higher-Order Functions (HOFs) in Dart are functions that can take other functions as parameters or return functions as results, 
+  // enabling functional programming patterns
   final result = noisy(bubbleOrderAscending)(<int>[3, 2, 1]);
   print(result);
 }
