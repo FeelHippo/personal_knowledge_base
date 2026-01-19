@@ -27,7 +27,7 @@ void main() {
 }
 
 // "static" means a member is available on the class itself instead of on instances of the class.
-// That's all it means,nd it isn't used for anything else. static modifies *members*.
+// That's all it means, and it isn't used for anything else. static modifies *members*.
 // https://medium.com/@yetesfadev/mastering-static-in-flutter-and-dart-3bd21a60fa48
 class Car {
   const Car();
