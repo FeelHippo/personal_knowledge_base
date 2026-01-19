@@ -7,7 +7,7 @@ import 'dart:io';
 //   - Polymorphism,
 //   - Inheritance.
 
-// ENCAPSULATION + INHERITANCE + POLYMORPHISM
+// ENCAPSULATION + INHERITANCE + POLYMORPHISM + ABSTRACTION
 
 // Encapsulation is the mechanism of hiding of data implementation by restricting access to public methods.
 // Instance variables are kept private and accessor methods are made public to achieve this.
@@ -19,7 +19,18 @@ import 'dart:io';
 // Polymorphism means one name many forms. It is further of two types — static and dynamic.
 // Static polymorphism is achieved using method overloading and dynamic polymorphism using method overriding.
 // It is closely related to inheritance.
-class Person extends PersonInterface {
+
+// Abstract means a concept or an Idea which is not associated with any particular instance.
+// Using abstract class/Interface we express the intent of the class rather than the actual implementation.
+abstract class PersonInterface {
+  String formatPersonalData();
+  void promptUserData();
+}
+
+
+// The “implements” keyword is used for implementing interfaces in Dart. 
+// An interface defines a contract that classes can adhere to by implementing its methods
+class Person implements PersonInterface {
   Person({
     required String fullName,
     required int age,
@@ -34,37 +45,40 @@ class Person extends PersonInterface {
   late String _fullName;
   late int _age;
 
+  String get storedFullName => this._fullName;
+  int get storedAge => this._age;
+
   @override
   String formatPersonalData() {
     return '$_fullName: $_age';
   }
 
   @override
-  String promptUserData() {
+  void promptUserData() {
     stdout.writeln('Type the full name');
     final String? fullNameStdin = stdin.readLineSync();
     stdout.writeln('Type the age as integer');
     final String? ageStdin = stdin.readLineSync();
     this._fullName = fullNameStdin ?? '';
     this._age = int.parse(ageStdin ?? '0');
-    return this.formatPersonalData();
   }
 }
 
-// ABSTRACTION
-// Abstract means a concept or an Idea which is not associated with any particular instance.
-// Using abstract class/Interface we express the intent of the class rather than the actual implementation.
-abstract class PersonInterface {
-  String formatPersonalData();
-  String promptUserData();
+// the “extends” keyword is used to create a class that inherits properties and behaviors 
+// from another class, referred to as the superclass
+class Italian extends Person {
+  Italian({required super.fullName, required super.age});
+
+  @override
+  String formatPersonalData() {
+    this.promptUserData();
+    return 'Mamma mia, Ciao! ${this.storedFullName}: ${this.storedAge}';
+  }
 }
 
 void main() {
-  final filippo = Person(fullName: 'Filippo Miorin', age: 40);
+  final filippo = Italian(fullName: 'Filippo Miorin', age: 40);
   print(filippo.formatPersonalData());
-  print(filippo.promptUserData());
-  print(filippo._fullName);
-  print(filippo._age);
 }
 
 // https://medium.com/@cancerian0684/what-are-four-basic-principles-of-object-oriented-programming-645af8b43727
