@@ -9,13 +9,13 @@ main() {
   var literal = {'1': 'John Smith', '2': 'Alice Jones'};
   print('Map Literals ${literal.runtimeType}');
   // map literals must maintain insertion order.
-  // This means that accounts is an instance of LinkedHashMap
+  // This means that "literal" is an instance of LinkedHashMap
 
   // Factory constructors
   var factory = new Map();
   print('Factory constructors ${factory.runtimeType}');
   // The Map class is abstract, which means the factory constructor actually creates an instance of a subclass of Map.
-  // So what is the actual type of accounts? It creates an empty [LinkedHashMap]
+  // So what is the actual type of "factory? It creates an empty [LinkedHashMap]
 
   // LinkedHashMap (or, InsertionOrderedMap)
   // A LinkedHashMap iterates through keys and values in the same order they were inserted.
