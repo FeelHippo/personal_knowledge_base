@@ -23,14 +23,21 @@ import 'dart:io';
 // Abstract means a concept or an Idea which is not associated with any particular instance.
 // Using abstract class/Interface we express the intent of the class rather than the actual implementation.
 abstract class PersonInterface {
-  String formatPersonalData();
+  void formatPersonalData();
   void promptUserData();
+}
+
+// a mixin is a way to reuse code in multiple classes without using inheritance.
+mixin Console {
+  void log(String message) {
+    print(message);
+  }
 }
 
 
 // The “implements” keyword is used for implementing interfaces in Dart. 
 // An interface defines a contract that classes can adhere to by implementing its methods
-class Person implements PersonInterface {
+class Person with Console implements PersonInterface {
   Person({
     required String fullName,
     required int age,
@@ -49,8 +56,8 @@ class Person implements PersonInterface {
   int get storedAge => this._age;
 
   @override
-  String formatPersonalData() {
-    return '$_fullName: $_age';
+  void formatPersonalData() {
+    log('$_fullName: $_age');
   }
 
   @override
@@ -70,15 +77,15 @@ class Italian extends Person {
   Italian({required super.fullName, required super.age});
 
   @override
-  String formatPersonalData() {
+  void formatPersonalData() {
     this.promptUserData();
-    return 'Mamma mia, Ciao! ${this.storedFullName}: ${this.storedAge}';
+    log('Mamma mia, Ciao! ${this.storedFullName}: ${this.storedAge}');
   }
 }
 
 void main() {
-  final filippo = Italian(fullName: 'Filippo Miorin', age: 40);
-  print(filippo.formatPersonalData());
+  Italian(fullName: 'Filippo Miorin', age: 40)
+    ..formatPersonalData();
 }
 
 // https://medium.com/@cancerian0684/what-are-four-basic-principles-of-object-oriented-programming-645af8b43727
