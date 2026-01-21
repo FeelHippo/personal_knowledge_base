@@ -1287,7 +1287,7 @@ class Super {
     
     // example
     doSomething() {
-        var httpResponse = this.anotherSubClass.get();
+        var httpResponse = this.anotherSubClass.httpCall();
         this.subClass.writeFileSystem(httpResponse);
     }
 }
