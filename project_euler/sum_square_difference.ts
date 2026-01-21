@@ -16,6 +16,8 @@ const sum_mapper = (_: number, i: number) => i+1;
 const sum = (): number => reduce_sum_of(sum_mapper);
 const square_of_sum = (): number => sum() * sum();
 
+console.log(`~~~ square_of_sum ${square_of_sum()}`);
+console.log(`~~~ sum_of_squares ${sum_of_squares()}`);
 console.log(square_of_sum() - sum_of_squares());
 
 
