@@ -52,6 +52,21 @@ void main() {
     return array;
   }
   print(bubbleOrderDescending([1, 2, 7, 6, 4, 9, 12]));
+  // https://dart.dev/language/patterns#matching
+  List<int> bubbleWithDartVariableAssignmentPattern(List<int> array) {
+    for (var i = 0; i < array.length - 1; i++) {
+      for (var k = 0; k < array.length - 1; k++) {
+        var (a, b) = (array[k], array[k + 1]);
+        if (a > b) {
+          (b, a) = (a, b); // swap b > a now
+          array[k] = a;
+          array[k + 1] = b;
+        }
+      }
+    }
+    return array;
+  }
+  print(bubbleWithDartVariableAssignmentPattern([1, 2, 7, 6, 4, 9, 12, 3]));
   // Counting Sort Algorithm
   List<int> countSort(List<int> nums) {
     final int listLength = nums.length;
