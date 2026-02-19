@@ -37,30 +37,31 @@ void main() {
     }
   });
   
-  Operations().printHead(head);
+  Operations.printHead(head);
 
   // remove element '6' from the list
-  Node? headWithoutElement = Operations().removeElements(head, 6);
+  Node? headWithoutElement = Operations.removeElements(head, 6);
   if (headWithoutElement != null) {
     print('Removed element, new list: ');
-    Operations().printHead(headWithoutElement);
+    Operations.printHead(headWithoutElement);
   }
 
   // sort the list
-  Node bubbleSortedList = Operations().bubbleSort(head!, Operations().linkedListLength(head!));
-  Operations().printHead(bubbleSortedList);
+  Node bubbleSortedList = Operations.bubbleSort(head!, Operations.linkedListLength(head!));
+  print('Result of sort operation: ');
+  Operations.printHead(bubbleSortedList);
 
   // remove duplicates from the list
-  Node? uniqueElements = Operations().deleteDuplicates(bubbleSortedList);
+  Node? uniqueElements = Operations.deleteDuplicates(bubbleSortedList);
   if (uniqueElements != null) {
-    print('Removed element, new unique list: ');
-    Operations().printHead(uniqueElements);
+    print('Remove duplicate element, new unique list: ');
+    Operations.printHead(uniqueElements);
   }
 }
 
 class Operations {
   // utilities
-  void printHead(Node? head) {
+  static void printHead(Node? head) {
     // print the list
     Node? temp = head;
     String listString = '';
@@ -72,7 +73,7 @@ class Operations {
       print('Generated linked list: $listString');
     }
   }
-  int linkedListLength(Node head) {
+  static int linkedListLength(Node head) {
     int length = 0;
     Node temp = head;
     while (temp.next != null) {
@@ -81,13 +82,13 @@ class Operations {
     }
     return length;
   }
-  Node? newHead;
   // Given the head of a linked list and an integer val,
   // remove all the nodes of the linked list that has Node.val == val, and return the new head.
-  Node? removeElements(Node? head, int val) {
+  static Node? removeElements(Node? head, int val) {
     if (head == null) {
         return null;
     }
+    Node? newHead;
     // iterate over the provided linked list
     while (head?.next != null) {
         // when the current value is not equal to the one to discard
@@ -100,7 +101,7 @@ class Operations {
             // which does not contain the value to discard
             // and add a new node at the end, with the current value
             } else {
-                Node temp = newHead!;
+                Node temp = newHead;
                 while (temp.next != null) {
                     temp = temp.next!;
                 }
@@ -111,20 +112,19 @@ class Operations {
     }
     return newHead;
   }
-  Node bubbleSort(Node head, int lenght) {
+  static Node bubbleSort(Node head, int length) {
     int iteration = 0;
     bool swapped = false;
 
     // iterate over the whole linked list
     // https://github.com/FeelHippo/JavascriptNinjaSkills/blob/9455d3f38bab21727cb10e0d87251b83f5c6959d/interviewQuestions.dart#L30
-    while (iteration < lenght) {
+    while (iteration < length) {
       // the traversing node, starts from head every iteration
-      // e.g. [6, 2, 7, 4]
+      // e.g. [6, 2, 4, 7] => 6
       Node traverseNode = head;
-      // the traversing node, starts from head every iteration
-      // e.g. [6, 2, 7, 4]
+      // the current node, relates to iteration
+      // e.g. [6, 2, 4, 7] => 6
       Node currentNode = head;
-      swapped = false;
 
       // traverse the entire linked list 
       // https://github.com/FeelHippo/JavascriptNinjaSkills/blob/9455d3f38bab21727cb10e0d87251b83f5c6959d/interviewQuestions.dart#L31
@@ -136,7 +136,6 @@ class Operations {
         // https://github.com/FeelHippo/JavascriptNinjaSkills/blob/9455d3f38bab21727cb10e0d87251b83f5c6959d/interviewQuestions.dart#L32
         // e.g. if (6 > 2) => true
         if (traverseNode.value > nextNode.value) {
-          swapped = true;
           // very fist iteration
           // e.g. 6 (== traverseNode) ==  head => true
           if (traverseNode == head) {
@@ -147,40 +146,36 @@ class Operations {
             traverseNode.next = nextNode.next;
             // e.g. 2.next = 6
             nextNode.next = traverseNode;
-            // e.g. swap 6 with 2
+            // e.g. currentNode == 6
             currentNode = nextNode;
             // e.g. head == 2
             head = currentNode;
 
-            // e.g. result is [2, 6, 7]
+            // e.g. result is [2, 6, 4, 7]
           } else {
             // Performing swap operation
-            // e.g. traverseNode == 7, nextNode == 4
-            // [2, 6, 7, 4]
+            // e.g. traverseNode == 6, nextNode == 4
+            // [2, 6, 4, 7]
 
-            // e.g. 7.next = null
+            // e.g. 6.next = 7
             // swap traverseNode(high value) with nextNode(low value)
             traverseNode.next = nextNode.next;
-            // e.g. 4.next = 7
+            // e.g. 4.next = 6
             nextNode.next = traverseNode;
+            // prepare next iteration. currentNode was 6 from [2, 6, 4, 7]
+            // at next iteration, current == 4 will be compared with next == 7
             // e.g. 6.next = 4
-            // prepare next iteration. currentNode was 6 from [2, 6, 7, 4]
-            // new status is [2, 6, 4, 7], where 6(current node).next is now 4
-            // at next iteration, 6 will be compared with 4
             currentNode.next = nextNode;
-            // e.g. current node = 4
+            // e.g. currentNode == 4
             currentNode = nextNode;
           }
           // traverse node now is unchanged. e.g. 7, because we traverse the original head
-          // at the next iteration, 4.next == null, and the loop will break
+          // at the next iteration, 4.next == null, and the loop will continue
           continue;
         }
+        // elements were in order, so skip to next traverse element
         currentNode = traverseNode;
         traverseNode = traverseNode.next!;
-      }
-      // If no swap occurred, break the loop
-      if (!swapped) {
-          break;
       }
       iteration++;
     }
@@ -188,7 +183,7 @@ class Operations {
   }
   // Given the head of a sorted linked list, delete all duplicates such that each element appears only once. 
   // Return the linked list sorted as well.
-  Node? deleteDuplicates(Node? head) {
+  static Node? deleteDuplicates(Node? head) {
     if (head == null || head.next == null) return head;
     // result linked list
     Node? newHead;
@@ -200,7 +195,7 @@ class Operations {
         if (head.value != currentHeadVal) {
             // create a new node to add to newHead
             final newNode = Node(value: head.value);
-            // if head has not been initialised
+            // if head has not been initialized
             // newNode will be the new head
             if (newHead == null) {
                 newHead = newNode;
