@@ -25,10 +25,11 @@
 // MAX CONSECUTIVE ONES II 
 // Given a binary array,
 // Find the largest window that has at most one 0 in it.
-// Input: [1,0,1,1,0] => | 1, 0, 1, 1 | => | 1, 1, 1, 1 |
-// Output: 4
+// Input: [1,0,1,1,0] => solution: | 1, 0, 1, 1 | => Output: 4
 
 // we need to expand our window until we have seen two 0’s
+// => right pointer is the non inclusive right index
+// => left pointer will then be the largest possible starting point
 // CONDITION TO STOP EXPANSION
 // count_of_zeroes == 2
 
@@ -218,14 +219,6 @@ int slidingWindow(List<int> nums) {
 }
 ```
 
-// the thought process is always as follows:
-
-// - Define condition to stop expanding our window => while (count_of_zeroes == 2)
-// Expand our window until we meet that condition but before expanding the window, process the element at the ‘right’ index.
-// If we meet our condition to stop expanding, process the current window.
-// Contract our current window, but before contracting, process the element at the ‘left’ index.
-// Process Edge Cases.
-
 // In Leetcode’s Max Consecutive Ones series (I, II, III), 
 // you literally just change the condition where we stop expanding the window.
 
@@ -238,17 +231,17 @@ int slidingWindow(List<int> nums) {
 int slidingWindow(List<int> nums) {
     int left = 0; 
     int right = 0;
-    int count_of_zeroes = 0;
+    bool count_of_zeroes = false;
     int max_window_length = 0;
     // Iterate over elements in our input
     while (right < nums.length) {
         // Expand the window
         if (nums[right] == 0) {
-            count_of_zeroes += 1;
+            count_of_zeroes = true;
         }
 
         // Meet the condition to stop expansion
-        while (count_of_zeroes == 1) {
+        while (count_of_zeroes) {
             // Process the current window
             final current_window_length = right - left;
             if (current_window_length > max_window_length) {
@@ -256,7 +249,7 @@ int slidingWindow(List<int> nums) {
             }
             // Contract the window
             if (nums[left] == 0) {
-                count_of_zeroes -= 1;
+                count_of_zeroes = false;
             }
             left += 1;
         }
@@ -265,7 +258,7 @@ int slidingWindow(List<int> nums) {
     }
 
     // this fixes the edge case above
-    if (count_of_zeroes < 2) {
+    if (count_of_zeroes < 1) {
         // Process the current window
         final current_window_length = right - left;
         if (current_window_length > max_window_length) {
