@@ -78,10 +78,21 @@ bool searchTargetInList({required int target, required List<int> nums}) {
   if (nums[mid] == target)
     return true;
   else if (target < nums[mid])
-    return searchTargetInList(target: target, nums: nums.sublist(0, mid));
+    return searchTargetInList(
+      target: target,
+      nums: nums.sublist(
+        left,
+        mid,
+      ),
+    );
   else
     return searchTargetInList(
-        target: target, nums: nums.sublist(mid + 1, right));
+      target: target,
+      nums: nums.sublist(
+        mid + 1,
+        right,
+      ),
+    );
 }
 
 bool searchTargetInLinkedList({
