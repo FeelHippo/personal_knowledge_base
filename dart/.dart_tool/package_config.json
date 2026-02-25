@@ -8,6 +8,24 @@
       "languageVersion": "3.0"
     },
     {
+      "name": "collection",
+      "rootUri": "file:///home/feelhippo/.pub-cache/hosted/pub.dev/collection-1.19.1",
+      "packageUri": "lib/",
+      "languageVersion": "3.4"
+    },
+    {
+      "name": "equatable",
+      "rootUri": "file:///home/feelhippo/.pub-cache/hosted/pub.dev/equatable-2.0.8",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "meta",
+      "rootUri": "file:///home/feelhippo/.pub-cache/hosted/pub.dev/meta-1.18.1",
+      "packageUri": "lib/",
+      "languageVersion": "3.5"
+    },
+    {
       "name": "playground",
       "rootUri": "../",
       "packageUri": "lib/",
@@ -15,8 +33,8 @@
     }
   ],
   "generator": "pub",
-  "generatorVersion": "3.9.2",
-  "flutterRoot": "file:///opt/flutter",
-  "flutterVersion": "3.35.5",
+  "generatorVersion": "3.10.4",
+  "flutterRoot": "file:///home/feelhippo/.cache/flutter_sdk",
+  "flutterVersion": "3.38.5",
   "pubCache": "file:///home/feelhippo/.pub-cache"
 }
