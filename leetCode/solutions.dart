@@ -182,4 +182,20 @@ class Solution {
     if (index != -1 && nums[index] == target) return index;
     return -1;
   }
+
+  // https://leetcode.com/problems/top-k-frequent-elements
+  List<int> topKFrequent(List<int> nums, int k) {
+    final List<int> answer = <int>[];
+    final Map<int, int> map = Map<int, int>();
+    for (final n in nums) {
+      map[n] = map.containsKey(n) ? map[n]! + 1 : 1;
+    }
+    final List<MapEntry<int, int>> sorted = map.entries.toList()
+      ..sort((a, b) => b.value.compareTo(a.value));
+    for (final MapEntry entry in sorted) {
+      if (answer.length == k) break;
+      answer.add(entry.key);
+    }
+    return answer;
+  }
 }
