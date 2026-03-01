@@ -99,4 +99,87 @@ class Solution {
     // take it from here, missing edge cases
     return max_window_length;
   }
+
+  // https://leetcode.com/problems/palindrome-number
+  bool isPalindrome(int x) {
+    return x.toString() == reverse(x.toString().split(''));
+  }
+
+  String reverse(List<String> y) {
+    String reversed = '';
+    for (String char in y) {
+      reversed = char + reversed;
+    }
+    return reversed;
+  }
+
+  // https://leetcode.com/problems/max-consecutive-ones
+  int findMaxConsecutiveOnes(List<int> nums) {
+    int left = 0;
+    int right = 0;
+    bool isRightZero = false;
+    int maxConsecutiveOnes = 0;
+    while (right < nums.length) {
+      if (nums[right] == 0) {
+        isRightZero = true;
+      }
+      while (isRightZero) {
+        final int currentConsecutiveOnes = right - left;
+        if (currentConsecutiveOnes > maxConsecutiveOnes)
+          maxConsecutiveOnes = currentConsecutiveOnes;
+
+        if (nums[left] == 0) isRightZero = false;
+        left += 1;
+      }
+      right += 1;
+    }
+    // edge cases
+    if (isRightZero == false) {
+      final int currentConsecutiveOnes = right - left;
+      if (currentConsecutiveOnes > maxConsecutiveOnes)
+        maxConsecutiveOnes = currentConsecutiveOnes;
+    }
+    return maxConsecutiveOnes;
+  }
+
+  // https://leetcode.com/problems/subsets
+  List<List<int>> subsets(List<int> nums) {
+    List<List<int>> subsets = [[]];
+    for (int num in nums) {
+      final int limit = subsets.length;
+      for (int i = 0; i < limit; i++) {
+        subsets.add([...subsets[i], num]);
+      }
+    }
+    return subsets;
+  }
+
+  // https://algo.monster/liteproblems/704
+  int search(List<int> nums, int target) {
+    int index = -1;
+    int left = 0;
+    int right = nums.length - 1;
+    // The key idea is to repeatedly divide the search space in half
+    while (left <= right) {
+      // find the middle point between left and right
+      final int midPointer = (left + right) ~/ 2;
+      // At each step, we look at the middle element and ask:
+      // "Is our target in the left half or the right half?"
+      // Instead of having three cases (found, go left, go right),
+      // it uses a two-way decision:
+      if (nums[midPointer] >= target) {
+        // left side
+        // This approach guarantees that if the target exists,
+        // it will eventually be at position l when the loop terminates (when l equals r)
+        index = midPointer;
+        // we're essentially finding the leftmost position where nums[pos] >= target
+        right = midPointer - 1;
+      } else {
+        // right side
+        left = midPointer + 1;
+      }
+    }
+    if (index != -1 && nums[index] == target) return index;
+    return -1;
+  }
 }
