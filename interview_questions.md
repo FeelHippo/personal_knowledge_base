@@ -2534,7 +2534,7 @@ In my opinion:
 - performance: separation of concerns between server and client is positive
 - static assets: the use of CDN to serve the client is also positive
 - authentication: there is some added complexity, see <a href="#oauth-2">OAuth 2.0</a> and <li><a href="#open-id-connect">OpenID Connect</a></li>
-- [CORS](https://github.com/FeelHippo/CORS_exploration/blob/ae665059149b9e0e350655b379b1a4388bd2715a/server.js#L109: If you host the webapp on a different hostname (e.g. a CDN) you may need to deal with it
+- [CORS](https://github.com/FeelHippo/CORS_exploration/blob/ae665059149b9e0e350655b379b1a4388bd2715a/server.js#L109): If you host the webapp on a different hostname (e.g. a CDN) you may need to deal with it
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
