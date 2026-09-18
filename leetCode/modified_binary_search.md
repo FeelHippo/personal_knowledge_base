@@ -1,7 +1,7 @@
 // Search a target in an ordered list, by dividing the list into half
-// then recursively each slice in half
+// then recursively slice each part in half
 
-// This approach is quite useful to solve the problems whenever we are given a sorted Array 
+// This approach is quite useful whenever we are given a sorted Array 
 // or Linked List or Matrix, and we are asked to find a certain element.
 
 // - pointers: left == 0, right == list.length - 1

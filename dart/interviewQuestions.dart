@@ -258,4 +258,34 @@ void main() {
   List<int> nums2 = [2,5,6];
   merge(nums1, 3, nums2, 3);
   print(nums1);
+
+  // https://edabit.com/challenge/xRMQG4Sxewx5agDRr
+  // Find the Highest Integer in the List Using Recursion
+
+  int findHighestInteger(List<int> integers, {int highest = 0}) {
+    if (integers.length == 0) {
+      return highest;
+    }
+    final last = integers.removeLast();
+    if (last > highest) {
+      highest = last;
+    }
+    return findHighestInteger(integers, highest: highest);
+  }
+  print(findHighestInteger([-1, 3, 5, 6, 99, 12, 2]));
+  print(findHighestInteger([0, 12, 4, 87]));
+  print(findHighestInteger([8]));
+
+  // https://edabit.com/challenge/BuwHwPvt92yw574zB
+  // List of Multiples
+
+  List<int> listOfMultiples(int num, int limit, {List<int>? integers, int counter = 1}) {
+    final multiples = integers ?? <int>[];
+    if (counter > limit) return multiples;
+    multiples.add(num * counter);
+    return listOfMultiples(num, limit, integers: multiples, counter: counter + 1);
+  }
+  print(listOfMultiples(7, 5));
+  print(listOfMultiples(12, 10));
+  print(listOfMultiples(17, 6));
 }
